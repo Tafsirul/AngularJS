@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Search Sort & Pagination </title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body ng-app="customerApp">
+	<div ng-controller="customerCtrl">
+		<div class="page-header">
+			<center><h2>Customer Table App</h2></center>
+		</div>
+
+		<div class="form-group">
+			<label>Add Customer</label>
+			<button class="btn btn-primary glyphicon glyphicon-plus" data-toggle="modal" data-target="#addSection" ></button>
+		</div>
+
+		<div class="form-inline">
+			<div class="form-group">
+				<label>Search</label>
+				<input type="text" ng-model="search" class="form-control" placeholder="Search">
+			</div>
+		</div>
+		<br>
+
+		<table class="table table-striped table-hover">
+			<tr><th ng-click="sort('ID')">ID
+					<span class="glyphicon sort-icon" ng-show="sortKey=='ID'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':!reverse}"></span>
+				</th>
+				<th ng-click="sort('FirstName')">First Name
+					<span class="glyphicon sort-icon" ng-show="sortKey=='FirstName'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':!reverse}"></span>
+				</th>
+				<th ng-click=sort('LastName')>Last Name
+					<span class="glyphicon sort-icon" ng-show="sortKey=='LastName'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':!reverse}"></span>
+				</th>
+				<th ng-click=sort('Age')>Age
+				<span class="glyphicon sort-icon" ng-show="sortKey=='Age'" ng-class="{'glyphicon-chevron-up':reverse, 'glyphicon-chevron-down':!reverse}"></span>
+				</th>
+				<th>Hobby</th>
+				<th>Actions</th>
+			</tr>
+
+				<!-- this ng-repeat will be replace by dir-paginate directives. what it does is deligates later on to ng-repeat but it add more functions. (and one more filter we have to add which is itemPerPage) -->
+
+			<tr dir-paginate="customer in customers | filter:search | itemsPerPage:5 | orderBy:sortKey:reverse">
+				<td>{{customer.ID}}</td>
+				<td>{{customer.FirstName}}</td>
+				<td>{{customer.LastName}}</td>
+				<td>{{customer.Age}}</td>
+				<td>{{customer.Hobby}}</td>
+				<td><button class="btn btn-sm btn-danger glyphicon glyphicon-trash" ng-click="delCustomer(customer)"></button></td>
+			</tr>
+
+		</table>
+		
+		<div class="modal fade" id="addSection" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-header">
+					<h4>Add Customer:</h4>
+				</div>
+				<div class="modal-content">
+					<form>
+					  <div class="form-group">
+					    <input ng-model="cID" type="number" class="form-control" placeholder="Customer ID no.">
+					  </div>
+					  <div class="form-group">
+					    <input ng-model="cFname" type="text" class="form-control" placeholder="First Name">
+					  </div>
+					  <div class="form-group">
+					    <input ng-model="cLname" type="text" class="form-control" placeholder="Last Name">
+					  </div>
+					  <div class="form-group">
+					    <input ng-model="cage" type="number" placeholder="Age" class="form-control">
+					  </div>
+					  <div class="form-group">
+					    <input ng-model="cHobby" type="text" placeholder="Hobby" class="form-control">
+					  </div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-md btn-success glyphicon glyphicon-ok" data-dismiss="modal" ng-click="addCustomer()"></button>
+					<button class="btn btn-md btn-danger glyphicon glyphicon-remove" data-dismiss="modal"></button>
+				</div>
+			</div>
+		</div>
+
+
+
+	   	<dir-pagination-controls max-size="5" direction-links="true" boundary-links="true">
+	   	</dir-pagination-controls>
+	</div>
+
+	<script src="angular.min.js"></script>
+	<script src="dirPagination.js"></script>
+	<script src="app.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+ 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</body>
+</html>
