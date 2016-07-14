@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="chartApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Google Line Chart</title>
+    <link rel="stylesheet" href="styles/style.css"/>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="scripts/angular.min.js"></script>
+    <script type="text/javascript" src="scripts/script.js"></script>
+</head>
+<body>
+<div class="container" ng-controller="ChartController as chart">
+    <div class="content">
+        <div class="select-div">
+            <select ng-model="chart.selectmodel" ng-change="chart.selectChart()">
+                <option value="sales">Overall Sales</option>
+                <option value="orders">Overall Orders</option>
+                <option value="pageViews">Page views</option>
+                <option value="clickThruRate">clickThruRate</option>
+
+            </select>
+        </div>
+        <div class="chart-content">
+            <div id="line-chart"></div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
