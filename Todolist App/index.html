@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo list</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+<body ng-app="toDoApp">
+    <div ng-controller="toDoCtrl">
+        <div class="form-group">
+            <h1>ToDo List</h1>
+            <div class="top-box">
+                <form>
+                    <input type="text" class="form-control todo-box" placeholder="What to do?" ng-model="sub">
+                </form>
+                <button class="btn btn-primary add-btn" ng-click="addTodo()">Add</button>
+            </div>
+        </div>
+        <ul class="list-unstyled">
+            <li class="middle-box" ng-repeat="toDo in toDos | filter:{'isCompleted':disp}" ng-class="{complete:toDo.isCompleted}">
+                <input type="checkbox" ng-model="toDo.isCompleted">
+                <span class="todo" ng-hide="editMode">{{toDo.subject}}</span>
+                    <input type="text" ng-model="toDo.subject" ng-show="editMode">
+                <button class="btn btn-danger glyphicon glyphicon-trash btn-sm trash-button" ng-click="deleteTodo($index)"></button>
+                <button class="btn btn-success glyphicon glyphicon-edit btn-sm edit-button" ng-click="editMode=!editMode" ng-init="editMode=false"></button>
+            </li>
+        </ul>
+        <hr>
+
+        <select ng-model="disp">
+            <option value="">All</option>
+            <option value="false">Incomplete</option>
+            <option value="true">Complete</option>
+        </select>
+        <hr>
+        <h4>Completed Tasks: {{(toDos | filter:{'isCompleted':true}).length}} of {{toDos.length}}</h4>
+
+        <div class="form-group">
+            <hr>
+            <h5>Code written by Tafsirul Amin</h5>
+        </div>
+
+    </div>
+
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

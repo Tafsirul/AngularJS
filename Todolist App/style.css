@@ -1,0 +1,37 @@
+.complete{
+    text-decoration: line-through;
+}
+.form-group{
+    padding: 20px;
+    text-align: center;
+}
+form{
+    display: inline-block;
+}
+.top-box{
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+.todo-box{
+    font: bold 25px tahoma;
+    margin-top: 25px;
+}
+.add-btn{
+    margin-top: -26px;
+}
+.edit-button,.trash-button{
+    float: right;
+}
+.middle-box{
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    display: block;
+    padding: 10px;
+}
+.todo{
+    padding-top: 2px;
+    font: 15px Arial;
+}
+
